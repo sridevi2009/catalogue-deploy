@@ -18,17 +18,19 @@ pipeline {
     }    
    //   build
     stages {
-        stage('Deploy') {
-           stage('print version') {
-                steps {
-                    sh """
-                      echo "version: ${params.version}"
-                      echo "environment: ${params.environment}"
-                    """  
+        
+        stage('print version') {
+            steps {
+                sh """
+                    echo "version: ${params.version}"
+                    echo "environment: ${params.environment}"
+                """
+            }  
+        }        
                      
-                }
-           }
-        }
+                   
+           
+    
        
     }   
     //  post build
