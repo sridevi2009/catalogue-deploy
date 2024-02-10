@@ -11,6 +11,7 @@ pipeline {
     options {
         timeout(time: 1, unit: 'HOURS') 
         disableConcurrentBuilds()
+        ansicolor('xterm')
     }
     parameters {
         string(name: 'version', defaultValue: '', description: 'What is the artifact version?')
@@ -34,7 +35,15 @@ pipeline {
                     terraform init --backend-config=${params.environment}/backend.tf -reconfigure
                 """
             }  
-        }         
+        }
+         stage('plan') {
+            steps {
+                sh """
+                    cd terraform
+                    terraform plan -var-file=${params.environment}/${params.environment}.tfvars -var="app_version=${params.version}"
+                """
+            }  
+        }           
                      
     }   
     //  post build
