@@ -1,7 +1,7 @@
 bucket = "gopisri-dev"
 key    = "catalogue"
 region = "us-east-1"
-dynamodb_table = "gopisri-locking-dev"
+dynamodb_table = "gopisri-dev-locking"
 
 
 
