@@ -28,6 +28,6 @@ variable app_version {
   
 }
 
-variable "iam_instance_profile" {
-  default = "shellscriptrolefroroboshop"
-}
+# variable "iam_instance_profile" {
+#   default = "shellscriptrolefroroboshop"
+# }
