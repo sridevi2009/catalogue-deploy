@@ -60,25 +60,25 @@ resource "null_resource" "catalogue" {
 }
 
 resource "aws_ec2_instance_state" "catalogue" {
-    instance_id = module.catalogue.id
-    state = "stopped"
-    depends_on = [ null_resource.catalogue ]
+  instance_id = module.catalogue.id
+  state = "stopped"
+  depends_on = [ null_resource.catalogue ]
 }
 
 resource "aws_ami_from_instance" "catalogue" {
-    name = "${local.name}-${var.tags.component}-${local.current_time}"
-    source_instance_id = module.catalogue.id
+  name = "${local.name}-${var.tags.component}-${local.current_time}"
+  source_instance_id = module.catalogue.id
 }
 
 resource "null_resource" "catalogue_delete" {
   # Changes to any instance of the cluster requires re-provisioning
     triggers = {
-        instance_id = module.catalogue.id
+      instance_id = module.catalogue.id
     }
 
     provisioner "local-exec" {
-        # Bootstrap script called with private_ip of each node in the cluster
-        command = "aws ec2 terminate-instances --instance-ids ${module.catalogue.id}"   
+      # Bootstrap script called with private_ip of each node in the cluster
+      command = "aws ec2 terminate-instances --instance-ids ${module.catalogue.id}"   
     }
     
     depends_on = [ aws_ami_from_instance.catalogue, null_resource.catalogue ]
