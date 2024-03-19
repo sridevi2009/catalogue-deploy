@@ -106,7 +106,7 @@ resource "aws_launch_template" "catalogue" {
 }
 
 resource "aws_autoscaling_group" "catalogue" {
-  name                      = "${local.name}-${var.tags.Component}"
+  name                      = "${local.name}-${var.tags.component}"
   max_size                  = 10
   min_size                  = 1
   health_check_grace_period = 60
@@ -130,7 +130,7 @@ resource "aws_autoscaling_group" "catalogue" {
 
   tag {
     key                 = "Name"
-    value               = "${local.name}-${var.tags.Component}"
+    value               = "${local.name}-${var.tags.component}"
     propagate_at_launch = true
   }
 
@@ -151,7 +151,7 @@ resource "aws_lb_listener_rule" "catalogue" {
 
   condition {
     host_header {
-      values = ["${var.tags.Component}.app-${var.environment}.${var.zone_name}"]
+      values = ["${var.tags.component}.app-${var.environment}.${var.zone_name}"]
     }
   }
 }
