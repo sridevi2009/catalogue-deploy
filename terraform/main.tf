@@ -32,21 +32,21 @@ module "catalogue" {
 resource "null_resource" "catalogue" {
   # Changes to any instance of the cluster requires re-provisioning
     triggers = {
-        instance_id = module.catalogue.id
+      instance_id = module.catalogue.id
     }
 
   # Bootstrap script can run on any instance of the cluster
   # So we just choose the first in this case
     connection {
-        host = module.catalogue.private_ip
-        type = "ssh"
-        user = "centos"
-        password = "DevOps321"
+      host = module.catalogue.private_ip
+      type = "ssh"
+      user = "centos"
+      password = "DevOps321"
     }  
 
     provisioner "file" {
-        source      = "bootstrap.sh"
-        destination = "/tmp/bootstrap.sh"
+      source      = "bootstrap.sh"
+      destination = "/tmp/bootstrap.sh"
     }
 
     provisioner "remote-exec" {
