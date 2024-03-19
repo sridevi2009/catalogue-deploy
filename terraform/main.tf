@@ -158,7 +158,7 @@ resource "aws_lb_listener_rule" "catalogue" {
 
 resource "aws_autoscaling_policy" "catalogue" {
   autoscaling_group_name = aws_autoscaling_group.catalogue.name
-  name                   = "${local.name}-${var.tags.Component}"
+  name                   = "${local.name}-${var.tags.component}"
   policy_type            = "TargetTrackingScaling"
 
   target_tracking_configuration {
